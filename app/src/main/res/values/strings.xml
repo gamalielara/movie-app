@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Movie App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="by_ara_gamaliel">by Ara Gamaliel</string>
+    <string name="the_movieapp">The MovieApp</string>
+    <string name="add_email">Add Email</string>
+    <string name="add_password">Add Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here</string>
+    <string name="register_to_movieapp">Register to MovieApp</string>
+    <string name="add_username">Add Username</string>
+    <string name="add_email_text">Add Email</string>
+    <string name="add_password_text">Add Password</string>
+    <string name="add_confirmation_password">Add Confirmation Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login_here">Already have an account? Login here</string>
+    <string name="login_to_movieapp_text">Login To MovieApp</string>
+</resources>
