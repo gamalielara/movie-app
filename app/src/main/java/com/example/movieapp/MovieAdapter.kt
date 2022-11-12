@@ -40,6 +40,4 @@ class MovieAdapter(private val movieList: List<Movie>, private val context: Cont
     override fun getItemCount(): Int {
         return movieList.size
     }
-
-
 }

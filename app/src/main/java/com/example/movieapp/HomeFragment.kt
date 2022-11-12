@@ -6,9 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.movieapp.model.GetNowPlayingMovies
 import com.example.movieapp.model.GetPopularMovies
 import com.example.movieapp.model.Movie
 import com.example.movieapp.service.ApiClient
@@ -22,7 +25,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchPopularMovies()
     }
 
     override fun onCreateView(
@@ -33,7 +35,23 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fetchPopularMovies()
+
+        nowPlayingButton.setOnClickListener{
+            fetchNowPlayingMovies()
+        }
+
+        popularMenuButton.setOnClickListener{
+            fetchPopularMovies()
+        }
+    }
+
     private fun fetchPopularMovies() {
+        subText.text = "Popular Movies"
+
         ApiClient.instance.getPopularMovies(ApiKey.API_KEY).enqueue(object :
             Callback<GetPopularMovies> {
             override fun onResponse(
@@ -45,6 +63,24 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<GetPopularMovies>, t: Throwable) {
+                Log.e("GAGAL!!", t.message.toString())
+            }
+        })
+    }
+
+    private fun fetchNowPlayingMovies() {
+        subText.text = "Now Playing Movies"
+        ApiClient.instance.getNowPlayingMovies(ApiKey.API_KEY).enqueue(object :
+            Callback<GetNowPlayingMovies> {
+            override fun onResponse(
+                call: Call<GetNowPlayingMovies>,
+                response: Response<GetNowPlayingMovies>
+            ) {
+                val body = response.body()
+                if(body != null) showMovies(body.results)
+            }
+
+            override fun onFailure(call: Call<GetNowPlayingMovies>, t: Throwable) {
                 Log.e("GAGAL!!", t.message.toString())
             }
         })

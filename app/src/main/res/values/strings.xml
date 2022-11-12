@@ -2,8 +2,7 @@
     <string name="app_name">Movie App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="by_ara_gamaliel">by Ara Gamaliel</string>
-    <string name="the_movieapp">The MovieApp</string>
+    <string name="the_movieapp">The MovieApp By Ara Gamaliel</string>
     <string name="add_email">Add Email</string>
     <string name="add_password">Add Password</string>
     <string name="login">Login</string>
