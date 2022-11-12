@@ -1,5 +1,6 @@
 package com.example.movieapp
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -50,7 +51,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun showMovies(movies: List<Movie>){
-        val adapter = MovieAdapter(movies)
+        val context = requireActivity()
+        val adapter = MovieAdapter(movies, context)
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         moviesList.layoutManager = linearLayoutManager
         moviesList.adapter = adapter

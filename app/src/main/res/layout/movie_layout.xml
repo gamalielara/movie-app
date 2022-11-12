@@ -17,7 +17,7 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:layout_weight="3"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         android:layout_gravity="center_vertical">
         <TextView
             android:id="@+id/filmTitle"
@@ -34,15 +34,18 @@
             android:layout_height="wrap_content"
             android:text="Film Genre Here"
             android:textColor="@color/white"
-            android:textSize="13sp"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/filmRating"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Film Rating Here"
             android:textColor="@color/white"
-            android:textSize="10sp"/>
+            android:drawableEnd="@drawable/star_drawable"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
     </LinearLayout>
 
 
