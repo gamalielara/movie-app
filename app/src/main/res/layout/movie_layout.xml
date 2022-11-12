@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/box_drawable"
+    android:padding="10dp"
+    android:layout_marginVertical="10dp">
+
+    <ImageView
+        android:id="@+id/filmPoster"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:paddingLeft="20dp"
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:id="@+id/filmTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Film Title Here"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/filmGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Film Genre Here"
+            android:textColor="@color/white"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/filmRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Film Rating Here"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

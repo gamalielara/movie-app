@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/meText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/by_ara_gamaliel"
@@ -24,4 +25,12 @@
         app:layout_constraintTop_toBottomOf="@+id/movieAppText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/moviesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meText"
+        android:layout_margin="20dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
