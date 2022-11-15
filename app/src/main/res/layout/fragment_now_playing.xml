@@ -20,7 +20,7 @@
         android:id="@+id/subText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Subtext Here"
+        android:text="Now Playing Movies"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/movieAppText"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -57,12 +57,13 @@
                 android:id="@+id/nowPlayingMenuIcon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/play_outline_drawable"/>
+                android:src="@drawable/play_filled_drawable"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 android:text="Now Playing"/>
         </LinearLayout>
 
@@ -89,6 +90,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/topRatedMenuButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
