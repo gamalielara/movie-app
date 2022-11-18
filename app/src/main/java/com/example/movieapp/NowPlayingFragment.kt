@@ -1,5 +1,8 @@
 package com.example.movieapp
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,8 +24,13 @@ import retrofit2.Response
 
 class NowPlayingFragment : Fragment() {
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedPreferences =
+            requireActivity().getSharedPreferences("userDetail", Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
@@ -33,8 +41,17 @@ class NowPlayingFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_now_playing, container, false)
     }
 
+    @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(!sharedPreferences.getBoolean("is_logged_in", false)){
+            findNavController().navigate(R.layout.fragment_login)
+        }
+
+        val username = sharedPreferences.getString("user_email", "")
+
+        helloUsername.text = "Hello, $username!"
+
         fetchNowPlayingMovies()
         bottomTabBarButton()
     }

@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movieapp.model.GetNowPlayingMovies
-import com.example.movieapp.model.GetPopularMovies
 import com.example.movieapp.model.GetTopRatedMovies
 import com.example.movieapp.model.Movie
 import com.example.movieapp.service.ApiClient
