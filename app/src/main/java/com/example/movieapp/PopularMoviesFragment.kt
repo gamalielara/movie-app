@@ -12,9 +12,7 @@ import com.example.movieapp.model.GetPopularMovies
 import com.example.movieapp.model.Movie
 import com.example.movieapp.service.ApiClient
 import com.example.movieapp.service.ApiKey
-import kotlinx.android.synthetic.main.fragment_now_playing.*
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
-import kotlinx.android.synthetic.main.fragment_popular_movies.moviesList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,7 +68,12 @@ class PopularMoviesFragment : Fragment() {
 
     private fun showMovies(movies: List<Movie>){
         val context = requireActivity()
-        val adapter = MovieAdapter(movies, context)
+        val adapter =
+            MovieAdapter(
+                movies,
+                { bundle: Bundle -> requireActivity().supportFragmentManager.setFragmentResult("redirectMovie", bundle)},
+                context
+            )
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         moviesList.layoutManager = linearLayoutManager
         moviesList.adapter = adapter

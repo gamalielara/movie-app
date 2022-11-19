@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Movie Title Here"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+        <ImageView
+            android:id="@+id/moviePoster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="75dp"
+            android:layout_marginVertical="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieTitle" />
+
+        <LinearLayout
+            android:id="@+id/movieInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:layout_marginStart="25dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moviePoster">
+
+            <TextView
+                android:id="@+id/movieReleased"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Released On " />
+
+            <TextView
+                android:id="@+id/movieRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/star_drawable"
+                android:drawablePadding="5dp"
+                android:text="Rating: 4.5/5"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/movieDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:paddingBottom="20dp"
+            android:text="Movie details here"
+            android:layout_marginTop="10dp"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieInfo" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_homeFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
@@ -48,6 +51,15 @@
         tools:layout="@layout/fragment_user" >
         <action
             android:id="@+id/action_userFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.movieapp.MovieDetailFragment"
+        android:label="MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail">
+        <action
+            android:id="@+id/action_movieDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

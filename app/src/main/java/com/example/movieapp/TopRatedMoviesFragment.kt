@@ -64,9 +64,13 @@ class TopRatedMoviesFragment : Fragment() {
         }
     }
 
-    private fun showMovies(movies: List<Movie>){
+    private fun showMovies(movies: List<Movie>) {
         val context = requireActivity()
-        val adapter = MovieAdapter(movies, context)
+        val adapter = MovieAdapter(
+            movies,
+            { bundle: Bundle -> requireActivity().supportFragmentManager.setFragmentResult("redirectMovie", bundle)},
+            context
+        )
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         moviesList.layoutManager = linearLayoutManager
         moviesList.adapter = adapter

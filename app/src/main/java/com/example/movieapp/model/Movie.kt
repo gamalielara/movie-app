@@ -32,4 +32,4 @@ data class Movie(
     var voteAverage: Double,
     @SerializedName("vote_count")
     var voteCount: Int
-)
+): java.io.Serializable

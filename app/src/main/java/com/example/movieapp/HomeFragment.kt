@@ -3,10 +3,12 @@ package com.example.movieapp
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -16,8 +18,8 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreference = requireActivity().getSharedPreferences("userDetail", Context.MODE_PRIVATE)
-
+        sharedPreference =
+            requireActivity().getSharedPreferences("userDetail", Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
@@ -25,6 +27,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        requireActivity().supportFragmentManager.setFragmentResultListener("redirectMovie", viewLifecycleOwner) { requestKey, bundle: Bundle ->
+            Log.e("TEST", bundle.toString())
+            findNavController().navigate(R.id.movieDetailFragment, bundle)
+        }
+
         if(!sharedPreference.getBoolean("is_logged_in", false)) {
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         } else {
@@ -38,14 +45,12 @@ class HomeFragment : Fragment() {
         setupUI()
     }
 
-    private fun setupUI(){
+    private fun setupUI() {
         val username = sharedPreference.getString("user_username", "")
         helloUsername.text = "Hello, $username!"
 
-        myProfileButton.setOnClickListener{
+        myProfileButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_userFragment)
         }
-
-
     }
 }

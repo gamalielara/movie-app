@@ -1,19 +1,18 @@
 package com.example.movieapp
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.commit
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapp.model.GetNowPlayingMovies
-import com.example.movieapp.model.GetPopularMovies
 import com.example.movieapp.model.Movie
 import com.example.movieapp.service.ApiClient
 import com.example.movieapp.service.ApiKey
@@ -23,7 +22,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class NowPlayingFragment : Fragment() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +39,11 @@ class NowPlayingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fetchNowPlayingMovies()
+        fetchNowPlayingMovies(view)
         bottomTabBarButton()
     }
 
-    private fun fetchNowPlayingMovies() {
+    private fun fetchNowPlayingMovies(view: View) {
         ApiClient.instance.getNowPlayingMovies(ApiKey.API_KEY).enqueue(object :
             Callback<GetNowPlayingMovies> {
             override fun onResponse(
@@ -74,9 +72,16 @@ class NowPlayingFragment : Fragment() {
 
     private fun showMovies(movies: List<Movie>){
         val context = requireActivity()
-        val adapter = MovieAdapter(movies, context)
+        val adapter = MovieAdapter(
+            movies,
+            { bundle: Bundle -> requireActivity().supportFragmentManager.setFragmentResult("redirectMovie", bundle)},
+            context
+        )
+
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         moviesList.layoutManager = linearLayoutManager
         moviesList.adapter = adapter
     }
+
+
 }
