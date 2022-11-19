@@ -15,4 +15,13 @@
     <string name="register">Register</string>
     <string name="already_have_an_account_login_here">Already have an account? Login here</string>
     <string name="login_to_movieapp_text">Login To MovieApp</string>
+    <string name="add_username_login">Add Username</string>
+    <string name="edit_my_profile">Edit My Profile</string>
+    <string name="hello_username">Hello, Username!</string>
+    <string name="edit_email">Edit email</string>
+    <string name="user_email_gmail_com">user_email@gmail.com</string>
+    <string name="edit_password">Edit password</string>
+    <string name="hello">hello</string>
+    <string name="edit_my_profile_text">Edit My Profile</string>
+    <string name="logout">Logout</string>
 </resources>

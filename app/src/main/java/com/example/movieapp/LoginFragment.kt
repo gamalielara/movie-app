@@ -40,28 +40,29 @@ class LoginFragment : Fragment() {
 
     private fun setupUI() {
         if (sharedPreferences.getBoolean("is_logged_in", false)) {
-            findNavController().navigate(R.id.action_loginFragment_to_home_nav)
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
         var editor = sharedPreferences.edit()
 
-        addEmail.doOnTextChanged { text, _, _, _ -> user.email = text.toString() }
+        addUsername.doOnTextChanged { text, _, _, _ -> user.username = text.toString() }
         addPassword.doOnTextChanged { text, _, _, _ -> user.password = text.toString() }
 
         loginButton.setOnClickListener {
-            if (user.email != null && user.password != null) {
+            if (user.username != null && user.password != null) {
                 user.isLoggedIn = true
 
-                editor.putString("user_email", user.email)
+                editor.putString("user_username", user.username)
+                editor.putString("user_email", "${user.username}@gmail.com")
                 editor.putString("user_password", user.password)
                 editor.putBoolean("is_logged_in", user.isLoggedIn)
                 editor.apply()
 
-                findNavController().navigate(R.id.action_loginFragment_to_home_nav)
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             } else {
                 Toast.makeText(
                     activity,
-                    "Sorry, you have to enter email and password first",
+                    "Sorry, you have to enter your username and password first",
                     Toast.LENGTH_LONG
                 ).show()
             }
