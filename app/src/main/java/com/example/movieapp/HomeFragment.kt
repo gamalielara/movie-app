@@ -27,14 +27,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        requireActivity().supportFragmentManager.setFragmentResultListener("redirectMovie", viewLifecycleOwner) { requestKey, bundle: Bundle ->
-            Log.e("TEST", bundle.toString())
-            findNavController().navigate(R.id.movieDetailFragment, bundle)
-        }
-
         if(!sharedPreference.getBoolean("is_logged_in", false)) {
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         } else {
+            requireActivity().supportFragmentManager.setFragmentResultListener("redirectMovie", viewLifecycleOwner) { requestKey, bundle: Bundle ->
+                Log.e("TEST", bundle.toString())
+                findNavController().navigate(R.id.movieDetailFragment, bundle)
+            }
             return inflater.inflate(R.layout.fragment_home, container, false)
         }
         return null
