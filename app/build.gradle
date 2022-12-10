@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.example.movieapp'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.movieapp"
         minSdk 26
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -53,9 +53,36 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
 
     //RecyclerView
-    implementation'androidx.recyclerview:recyclerview:version_code'
+    implementation 'androidx.recyclerview:recyclerview:version_code'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
+    //Koin
+    def koin_version = "3.2.2"
+    // Koin Core features
+    implementation "io.insert-koin:koin-core:$koin_version"
+    // Koin Test features
+    testImplementation "io.insert-koin:koin-test:$koin_version"
+    // Koin for JUnit 4
+    testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+    // Koin for JUnit 5
+    testImplementation "io.insert-koin:koin-test-junit5:$koin_version"
+
+    def koin_android_version= "3.3.0"
+    // Koin main features for Android
+    implementation "io.insert-koin:koin-android:$koin_android_version"
+    // Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_android_version"
+    // Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
+    // Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
+
+    // ViewModel + LiveData
+    implementation "androidx.activity:activity-ktx:1.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
 }

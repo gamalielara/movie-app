@@ -6,12 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movieapp.helper.RemoteDataSource
+import com.example.movieapp.helper.Resource
+import com.example.movieapp.helper.Status
 import com.example.movieapp.model.GetPopularMovies
 import com.example.movieapp.model.Movie
 import com.example.movieapp.service.ApiClient
 import com.example.movieapp.service.ApiKey
+import com.example.movieapp.viewmodel.MovieViewModel
+import com.example.movieapp.viewmodel.MoviewViewModelFactory
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,6 +27,8 @@ import kotlinx.android.synthetic.main.fragment_popular_movies.topRatedMenuButton
 
 class PopularMoviesFragment : Fragment() {
 
+    private lateinit var movieViewModel: MovieViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -29,6 +37,7 @@ class PopularMoviesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        movieViewModel = ViewModelProvider(this, MoviewViewModelFactory(RemoteDataSource(ApiClient.instance)))[MovieViewModel::class.java]
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_popular_movies, container, false)
     }
@@ -40,20 +49,21 @@ class PopularMoviesFragment : Fragment() {
     }
 
     private fun fetchPopularMovies() {
-        ApiClient.instance.getPopularMovies(ApiKey.API_KEY).enqueue(object :
-            Callback<GetPopularMovies> {
-            override fun onResponse(
-                call: Call<GetPopularMovies>,
-                response: Response<GetPopularMovies>
-            ) {
-                val body = response.body()
-                if(body != null) showMovies(body.results)
+        movieViewModel.getPopularMovies().observe(viewLifecycleOwner){
+                resource ->
+            when(resource.status){
+                Status.SUCCESS -> {
+                    val response = resource.data
+                    Log.e("FETCH POPULAR MOVIES SUCCESS ", response.toString())
+                    showMovies(response!!.results)
+                }
+                Status.ERROR -> {
+                    val response = resource.message
+                    Log.e("FETCH POPULAR MOVIES FAILED ", response .toString())
+                }
+                Status.LOADING -> {}
             }
-
-            override fun onFailure(call: Call<GetPopularMovies>, t: Throwable) {
-                Log.e("GAGAL!!", t.message.toString())
-            }
-        })
+        }
     }
 
     private fun bottomTabBarButton () {

@@ -10,18 +10,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movieapp.helper.RemoteDataSource
+import com.example.movieapp.helper.Status
 import com.example.movieapp.model.GetNowPlayingMovies
 import com.example.movieapp.model.Movie
 import com.example.movieapp.service.ApiClient
 import com.example.movieapp.service.ApiKey
+import com.example.movieapp.viewmodel.MovieViewModel
+import com.example.movieapp.viewmodel.MoviewViewModelFactory
 import kotlinx.android.synthetic.main.fragment_now_playing.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class NowPlayingFragment : Fragment() {
+
+    private lateinit var movieViewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +44,8 @@ class NowPlayingFragment : Fragment() {
 
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        movieViewModel = ViewModelProvider(this, MoviewViewModelFactory(RemoteDataSource(ApiClient.instance)))[MovieViewModel::class.java]
+
         super.onViewCreated(view, savedInstanceState)
 
         fetchNowPlayingMovies(view)
@@ -44,20 +53,21 @@ class NowPlayingFragment : Fragment() {
     }
 
     private fun fetchNowPlayingMovies(view: View) {
-        ApiClient.instance.getNowPlayingMovies(ApiKey.API_KEY).enqueue(object :
-            Callback<GetNowPlayingMovies> {
-            override fun onResponse(
-                call: Call<GetNowPlayingMovies>,
-                response: Response<GetNowPlayingMovies>
-            ) {
-                val body = response.body()
-                if(body != null) showMovies(body.results)
+        movieViewModel.getNowPlayingMovies().observe(viewLifecycleOwner){
+                resource ->
+            when(resource.status){
+                Status.SUCCESS -> {
+                    val response = resource.data
+                    Log.e("FETCH NOW PLAYING MOVIES SUCCESS ", response.toString())
+                    showMovies(response!!.results)
+                }
+                Status.ERROR -> {
+                    val response = resource.message
+                    Log.e("FETCH NOW PLAYING MOVIES FAILED ", response .toString())
+                }
+                Status.LOADING -> {}
             }
-
-            override fun onFailure(call: Call<GetNowPlayingMovies>, t: Throwable) {
-                Log.e("GAGAL!!", t.message.toString())
-            }
-        })
+        }
     }
 
     private fun bottomTabBarButton () {
